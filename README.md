@@ -1,5 +1,5 @@
-# market-place-products
-This project interfaces all products related actions.
+# market-place-purchase
+This project interfaces all purchase related actions.
 
 #### Technologies Used System Wide
 - Java 12
