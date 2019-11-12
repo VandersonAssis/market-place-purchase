@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  description: This is the market place's purchase service. This service handles any
+    actions related to purchasing
+  version: 1.0.0
+  title: Market Place
+  contact:
+    name: Vanderson Assis
+    email: assis.vanderson@gmail.com
+paths:
+  /purchase/start:
+    post:
+      tags:
+        - Purchase
+      summary: Starts the purchase flux
+      description: This endpoint starts the purchase of the selected products
+      operationId: startPurchase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurchaseProduct"
+        description: Product object that will be added to our database
+        required: true
+      responses:
+        "202":
+          description: Purchase flux has been succesfully initiated
+        "400":
+          description: There's a missing part in the request
+        "401":
+          description: The client is not authorized to access this endpoint
+        "404":
+          description: The product passed doesn't exist in the stock
+        "500":
+          description: Something went wrong in the server side. The client can't do anything about it and should report the error to the system administrator.
+servers:
+  - url: http://localhost/market-place/api/v1
+components:
+  schemas:
+    PurchaseProduct:
+      type: object
+      required:
+        - idProduct
+        - quantity
+      properties:
+        idProduct:
+          type: string
+        quantity:
+          type: integer
+          format: int32

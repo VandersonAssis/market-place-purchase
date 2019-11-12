@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.9.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.market.purchase</groupId>
+	<artifactId>market-place-purchase</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>market-place-purchase</name>
+	<description>This project handles all purchase related actions in the market place system</description>
+
+	<properties>
+		<java.version>12</java.version>
+		<openapi-generator-maven-plugin>4.1.3</openapi-generator-maven-plugin>
+		<openapi-generator>4.2.0</openapi-generator>
+		<openapi-jackson>0.2.0</openapi-jackson>
+		<lombok.version>1.18.10</lombok.version>
+		<junit5.version>5.5.2</junit5.version>
+		<mockito.core.version>3.1.0</mockito.core.version>
+		<gson.version>2.8.6</gson.version>
+		<sonar.plugin.version>3.6.0.1398</sonar.plugin.version>
+		<jacoco.plugin.version>0.8.5</jacoco.plugin.version>
+		<surefire.plugin.version>2.21.0</surefire.plugin.version>
+		<surefire.providers.version>2.22.2</surefire.providers.version>
+
+		<sonar.coverage.exclusions>
+			**/MarketPlacePurchaseApplication.java,
+			**/documents/**/*
+		</sonar.coverage.exclusions>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator</artifactId>
+			<version>${openapi-generator}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>${openapi-jackson}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit5.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.market.exceptionhandlers</groupId>
+			<artifactId>market-place-exception-handlers</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator-maven-plugin}</version>
+
+				<executions>
+					<execution>
+						<id>market-purchase</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>src/main/resources/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<configHelp />
+							<modelPackage>com.market.purchase.model</modelPackage>
+							<apiPackage>com.market.purchase.api</apiPackage>
+							<generateAliasAsModel>true</generateAliasAsModel>
+							<configOptions>
+								<sourceFolder>gen</sourceFolder>
+								<interfaceOnly>true</interfaceOnly>
+								<dateLibrary>java12</dateLibrary>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/openapi/gen</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>com.market.exceptionhandlers</groupId>
+							<artifactId>market-place-exception-handlers</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/libs/market-place-exception-handlers.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-providers</artifactId>
+						<version>${surefire.providers.version}</version>
+						<type>pom</type>
+					</dependency>
+
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>${junit5.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>${sonar.plugin.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.plugin.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
