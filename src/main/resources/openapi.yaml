@@ -19,7 +19,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PurchaseProduct"
+              $ref: "#/components/schemas/ProductLock"
         description: Product object that will be added to our database
         required: true
       responses:
@@ -37,14 +37,26 @@ servers:
   - url: http://localhost/market-place/api/v1
 components:
   schemas:
-    PurchaseProduct:
+    ProductLock:
       type: object
       required:
         - idProduct
         - quantity
+        - orderStatus
       properties:
+        lockId:
+          type: string
         idProduct:
           type: string
         quantity:
           type: integer
           format: int32
+        orderStatus:
+          type: string
+          enum:
+            - PENDING
+            - PROCESSING
+            - PAYMENT_NOT_AUTHORIZED
+            - FINISHED
+          default:
+            PENDING

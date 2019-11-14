@@ -1,7 +1,7 @@
 package com.market.purchase.integration.impl;
 
 import com.market.purchase.integration.ProductApiFacade;
-import com.market.purchase.model.PurchaseProduct;
+import com.market.purchase.model.ProductLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -21,11 +21,16 @@ public class ProductApiFacadeImpl implements ProductApiFacade {
     private String productsApiHost;
 
     @Override
-    public ResponseEntity<String> lockProduct(PurchaseProduct purchaseProduct) {
+    public ResponseEntity<ProductLock> lockProduct(ProductLock productLock) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(APPLICATION_JSON);
 
-        HttpEntity<PurchaseProduct> request = new HttpEntity<>(purchaseProduct, headers);
-        return restTemplate.postForEntity(this.productsApiHost.concat("/lock"), request, String.class);
+        HttpEntity<ProductLock> request = new HttpEntity<>(productLock, headers);
+        return restTemplate.postForEntity(this.productsApiHost.concat("/lock"), request, ProductLock.class);
+    }
+
+    @Override
+    public void deleteLock(String lockId) {
+        restTemplate.delete(this.productsApiHost.concat("/" + lockId + "/lock"));
     }
 }
