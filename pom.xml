@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.market.purchase</groupId>
 	<artifactId>market-place-purchase</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>market-place-purchase</name>
 	<description>This project handles all purchase related actions in the market place system</description>
 
