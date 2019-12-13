@@ -3,7 +3,7 @@ info:
   description: This is the market place's purchase service. This service handles any
     actions related to purchasing
   version: 1.0.0
-  title: Market Place
+  title: Market Place Purchase
   contact:
     name: Vanderson Assis
     email: assis.vanderson@gmail.com

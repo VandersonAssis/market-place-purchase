@@ -9,6 +9,7 @@ This project interfaces all purchase related actions.
 - Swagger
 - Lombok
 - Spring Boot
+- Spring Config Server
 - Sonar
 - Jacoco
 - JUnit
