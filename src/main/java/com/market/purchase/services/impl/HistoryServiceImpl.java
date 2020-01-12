@@ -1,7 +1,7 @@
 package com.market.purchase.services.impl;
 
 import com.market.purchase.documents.HistoryDocument;
-import com.market.purchase.integration.ProductApiFacade;
+import com.market.purchase.integration.products.ProductsApiProxy;
 import com.market.purchase.model.ProductLock;
 import com.market.purchase.repositories.HistoryRepository;
 import com.market.purchase.services.HistoryService;
@@ -18,7 +18,7 @@ public class HistoryServiceImpl implements HistoryService {
     private HistoryRepository historyRepository;
 
     @Autowired
-    private ProductApiFacade productApiFacade;
+    private ProductsApiProxy productsApiProxy;
 
     @Override
     public void handlePurchaseHistoryUpdate(ProductLock productLock) {
@@ -29,6 +29,6 @@ public class HistoryServiceImpl implements HistoryService {
 
         requireNonNull(historyDocument).setOrderStatus(HistoryDocument.OrderStatus.valueOf(productLock.getOrderStatus().toString()));
         this.historyRepository.save(historyDocument);
-        this.productApiFacade.deleteLock(productLock.getLockId());
+        this.productsApiProxy.deleteLock(productLock.getLockId());
     }
 }

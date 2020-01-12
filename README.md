@@ -5,13 +5,16 @@ This project interfaces all purchase related actions.
 - Java 12
 - MongoDB
 - RabbitMQ
-- Docker
-- Swagger
+- Docker (Containerization)
+- Netflix Feign (Declarative rest calls)
+- Netflix Ribbon (Client side load balancing)
+- Netflix Eureka
+- Swagger (API documentation and code generation)
 - Lombok
 - Spring Boot
-- Spring Config Server
-- Sonar
-- Jacoco
+- Spring Cloud Config Server (Centralized configuration files of the microservices)
+- Sonar (Helps on identifying code smells, test coverage and some more...)
+- Jacoco (Allows to integrate our tests results in the sonar web app)
 - JUnit
 - Mockito
 - Gson

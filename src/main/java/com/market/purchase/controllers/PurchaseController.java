@@ -3,7 +3,7 @@ package com.market.purchase.controllers;
 import com.market.purchase.amqp.AmqpService;
 import com.market.purchase.api.PurchaseApi;
 import com.market.purchase.documents.HistoryDocument;
-import com.market.purchase.integration.ProductApiFacade;
+import com.market.purchase.integration.products.ProductsApiProxy;
 import com.market.purchase.model.ProductLock;
 import com.market.purchase.repositories.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 public class PurchaseController extends BaseController implements PurchaseApi {
     @Autowired
-    private ProductApiFacade productApiFacade;
+    private ProductsApiProxy productsApiProxy;
 
     @Autowired
     private AmqpService amqpService;
@@ -26,7 +26,7 @@ public class PurchaseController extends BaseController implements PurchaseApi {
 
     @Override
     public ResponseEntity startPurchase(ProductLock productLock) {
-        ResponseEntity<ProductLock> lockResponse = this.productApiFacade.lockProduct(productLock);
+        ResponseEntity<ProductLock> lockResponse = this.productsApiProxy.lockProductQuantity(productLock);
         if(lockResponse.getStatusCode() != OK)
             return lockResponse;
 
