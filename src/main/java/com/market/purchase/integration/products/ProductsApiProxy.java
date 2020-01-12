@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
-@FeignClient(name = "${products.spring.application.name}")
+@FeignClient(name = "${api-gateway.application.name}")
 @RibbonClient(name = "${products.spring.application.name}")
 public interface ProductsApiProxy {
-    @PostMapping("/marketplace/api/v1/products/lock")
+    @PostMapping("/${products.spring.application.name}/marketplace/api/v1/products/lock")
     ResponseEntity<ProductLock> lockProductQuantity(@Valid @RequestBody ProductLock productLock);
 
-    @DeleteMapping("/marketplace/api/v1/products/{idLock}/lock")
+    @DeleteMapping("/${products.spring.application.name}/marketplace/api/v1/products/{idLock}/lock")
     ResponseEntity<Void> deleteLock(@PathVariable("idLock") String idLock);
 }
