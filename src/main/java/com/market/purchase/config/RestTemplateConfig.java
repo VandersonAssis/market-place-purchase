@@ -1,6 +1,6 @@
 package com.market.purchase.config;
 
-import com.market.exceptions.exceptionhandlers.ClientExceptionHandlers;
+import com.market.purchase.exceptions.exceptionhandlers.ClientExceptionHandlers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;

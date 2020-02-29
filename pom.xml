@@ -28,6 +28,8 @@
 		<surefire.plugin.version>2.21.0</surefire.plugin.version>
 		<surefire.providers.version>2.22.2</surefire.providers.version>
 		<spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+		<rest-assured.version>4.2.0</rest-assured.version>
+		<java-hamcrest.version>2.0.0.0</java-hamcrest.version>
 
 		<sonar.coverage.exclusions>
 			**/MarketPlacePurchaseApplication.java,
@@ -69,6 +71,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
 		</dependency>
 
 		<dependency>
@@ -127,9 +144,17 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.market.exceptionhandlers</groupId>
-			<artifactId>market-place-exception-handlers</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>java-hamcrest</artifactId>
+			<version>${java-hamcrest.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -203,26 +228,6 @@
 							<sources>
 								<source>target/generated-sources/openapi/gen</source>
 							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>com.market.exceptionhandlers</groupId>
-							<artifactId>market-place-exception-handlers</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/libs/market-place-exception-handlers.jar</file>
 						</configuration>
 					</execution>
 				</executions>
