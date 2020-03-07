@@ -24,8 +24,7 @@ public class HistoryServiceImpl implements HistoryService {
     public void handlePurchaseHistoryUpdate(ProductLock productLock) {
         HistoryDocument historyDocument = null;
         Optional<HistoryDocument> historyDocumentOptional = this.historyRepository.findByLockId(productLock.getLockId());
-        if(historyDocumentOptional.isPresent())
-            historyDocument = historyDocumentOptional.orElseThrow();
+        historyDocument = historyDocumentOptional.orElseThrow();
 
         requireNonNull(historyDocument).setOrderStatus(HistoryDocument.OrderStatus.valueOf(productLock.getOrderStatus().toString()));
         this.historyRepository.save(historyDocument);
