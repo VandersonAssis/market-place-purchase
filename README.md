@@ -11,9 +11,10 @@ This project interfaces all purchase related actions.
 - Netflix Eureka
 - Swagger (API documentation and code generation)
 - Spring Boot
-- Spring Cloud Config Server (Centralized configuration files of the microservices)
-- Spring Cloud Sleuth
-- Spring Cloud Zipkin
+- Cloud Config Server (Centralized configuration files of the microservices)
+- Cloud Sleuth (Adds trace ids on the rest calls. Helps a lot in finding bugs in microservices architecture)
+- Cloud Zipkin (Uses the Sleuth ids to present us the overall health of our rest calls)
+- Actuator (Used to display overall health and monitoring metadata of the system)
 - Sonar (Helps on identifying code smells, test coverage and some more...)
 - Jacoco (Allows to integrate our tests results in the sonar web app)
 - Rest Assured (Api integration tests)
