@@ -2,6 +2,7 @@ package com.market.purchase.services.impl;
 
 import com.market.purchase.documents.HistoryDocument;
 import com.market.purchase.integration.products.ProductsApiProxy;
+import com.market.purchase.integration.products.services.ProductsService;
 import com.market.purchase.repositories.HistoryRepository;
 import com.market.purchase.services.HistoryService;
 import org.junit.Before;
@@ -30,13 +31,13 @@ public class HistoryServiceImplTest {
     private HistoryRepository historyRepository;
 
     @Mock
-    private ProductsApiProxy productsApiProxy;
+    private ProductsService productsService;
 
     @Before
     public void setUp() {
         this.historyService = new HistoryServiceImpl();
         ReflectionTestUtils.setField(this.historyService, "historyRepository", this.historyRepository);
-        ReflectionTestUtils.setField(this.historyService, "productsApiProxy", this.productsApiProxy);
+        ReflectionTestUtils.setField(this.historyService, "productsService", this.productsService);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class HistoryServiceImplTest {
         HistoryDocument historyDocument = buildHistoryDocument();
         when(this.historyRepository.findByLockId(anyString())).thenReturn(Optional.of(historyDocument));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(historyDocument);
-        when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
+        when(this.productsService.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
 
         this.historyService.handlePurchaseHistoryUpdate(buildProductLock());
 
@@ -56,7 +57,7 @@ public class HistoryServiceImplTest {
         HistoryDocument historyDocument = buildHistoryDocument();
         when(this.historyRepository.findByLockId(anyString())).thenReturn(Optional.of(historyDocument));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(historyDocument);
-        when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
+        when(this.productsService.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
 
         this.historyService.handlePurchaseHistoryUpdate(buildProductLock());
 
@@ -68,11 +69,11 @@ public class HistoryServiceImplTest {
         HistoryDocument historyDocument = buildHistoryDocument();
         when(this.historyRepository.findByLockId(anyString())).thenReturn(Optional.of(historyDocument));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(historyDocument);
-        when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
+        when(this.productsService.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
 
         this.historyService.handlePurchaseHistoryUpdate(buildProductLock());
 
-        verify(this.productsApiProxy, times(1)).deleteLock(anyString());
+        verify(this.productsService, times(1)).deleteLock(anyString());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -80,7 +81,7 @@ public class HistoryServiceImplTest {
         HistoryDocument historyDocument = buildHistoryDocument();
         when(this.historyRepository.findByLockId(anyString())).thenReturn(Optional.empty());
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(historyDocument);
-        when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
+        when(this.productsService.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
 
         this.historyService.handlePurchaseHistoryUpdate(buildProductLock());
     }

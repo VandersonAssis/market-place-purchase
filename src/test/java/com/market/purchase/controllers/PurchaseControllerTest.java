@@ -5,6 +5,7 @@ import com.market.purchase.amqp.AmqpService;
 import com.market.purchase.documents.HistoryDocument;
 import com.market.purchase.exceptions.exceptionhandlers.ExceptionHandlers;
 import com.market.purchase.integration.products.ProductsApiProxy;
+import com.market.purchase.integration.products.services.ProductsService;
 import com.market.purchase.model.ProductLock;
 import com.market.purchase.repositories.HistoryRepository;
 import org.junit.Before;
@@ -34,7 +35,7 @@ public class PurchaseControllerTest {
     private PurchaseController purchaseController;
 
     @Mock
-    private ProductsApiProxy productsApiProxy;
+    private ProductsService productsService;
 
     @Mock
     private AmqpService amqpService;
@@ -57,7 +58,7 @@ public class PurchaseControllerTest {
     @Test
     public void shouldStartPurchaseAndReturnAccepted() throws Exception {
         ProductLock productLock = buildProductLock();
-        when(this.productsApiProxy.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
+        when(this.productsService.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(buildHistoryDocument());
         doNothing().when(this.amqpService).sendToProcessOrderQueue(any(ProductLock.class));
 
@@ -71,7 +72,7 @@ public class PurchaseControllerTest {
         ProductLock productLock = buildProductLock();
         productLock.setQuantity(0);
 
-        when(this.productsApiProxy.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
+        when(this.productsService.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(buildHistoryDocument());
         doNothing().when(this.amqpService).sendToProcessOrderQueue(any(ProductLock.class));
 
@@ -85,7 +86,7 @@ public class PurchaseControllerTest {
         ProductLock productLock = buildProductLock();
         productLock.setQuantity(-1);
 
-        when(this.productsApiProxy.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
+        when(this.productsService.lockProductQuantity(any(ProductLock.class))).thenReturn(new ResponseEntity<>(productLock, OK));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(buildHistoryDocument());
         doNothing().when(this.amqpService).sendToProcessOrderQueue(any(ProductLock.class));
 
@@ -98,7 +99,7 @@ public class PurchaseControllerTest {
     public void shouldForwardLockResponseWhenReturnIsNotOk() throws Exception {
         ProductLock productLock = buildProductLock();
 
-        when(this.productsApiProxy.lockProductQuantity(any(ProductLock.class)))
+        when(this.productsService.lockProductQuantity(any(ProductLock.class)))
                 .thenReturn(new ResponseEntity<>(productLock, INTERNAL_SERVER_ERROR));
         when(this.historyRepository.save(any(HistoryDocument.class))).thenReturn(buildHistoryDocument());
         doNothing().when(this.amqpService).sendToProcessOrderQueue(any(ProductLock.class));

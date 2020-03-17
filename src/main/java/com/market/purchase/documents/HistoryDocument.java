@@ -24,6 +24,8 @@ public class HistoryDocument {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    public HistoryDocument() {}
+
     private HistoryDocument(ProductLock productLock) {
         this.customerId = "to_be_implemented";
         this.productId = productLock.getIdProduct();
