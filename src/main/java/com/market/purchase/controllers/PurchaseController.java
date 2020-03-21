@@ -24,7 +24,7 @@ public class PurchaseController extends BaseController implements PurchaseApi {
     private static final Logger log = LogManager.getLogger(PurchaseController.class);
 
     @Autowired
-    private MessageSource messageSource;
+    private MessageSource msg;
 
     @Autowired
     private ProductsService productsService;
@@ -41,7 +41,7 @@ public class PurchaseController extends BaseController implements PurchaseApi {
                 productLock.getOrderStatus());
 
         if(productLock.getQuantity() <= 0)
-            throw new BaseHttpException(new ApiError(BAD_REQUEST, this.messageSource.getMessage("zeroed.purchase.quantity",
+            throw new BaseHttpException(new ApiError(BAD_REQUEST, this.msg.getMessage("zeroed.purchase.quantity",
                     null, Locale.getDefault())));
 
         ResponseEntity<ProductLock> lockResponse = this.productsService.lockProductQuantity(productLock);

@@ -5,4 +5,4 @@ RUN mkdir /opt/app
 COPY /target/market-place-purchase-0.0.1.jar /opt/app
 WORKDIR /opt/app
 CMD java -jar market-place-purchase-0.0.1.jar
-EXPOSE 8081
+EXPOSE 8011

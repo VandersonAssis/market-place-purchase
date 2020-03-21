@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,6 +43,9 @@ public class PurchaseControllerTest {
 
     @Mock
     private HistoryRepository historyRepository;
+
+    @Mock
+    private MessageSource msg;
 
     private MockMvc mockMvc;
     private String apiPrefix;
