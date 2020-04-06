@@ -3,12 +3,13 @@ This project interfaces all purchase related actions.
 
 ### Technologies Used System Wide
 - Java 12
-- MongoDB
-- RabbitMQ
 - Docker (Containerization)
-- Netflix Feign (Declarative rest calls)
-- Netflix Ribbon (Client side load balancing)
-- Netflix Eureka
+- Kubernetes (Container Orchestration) 
+- RabbitMQ
+- MongoDB
+- Netflix Ribbon (Client side load balancing - This will be separated in a different branch, since I'm coding the Kubernetes part now)
+- Netflix Eureka (Naming server - This will be separated in a different branch, since I'm coding the Kubernetes part now)
+- Netflix Feign (Declarative rest calls - This will be separated in a different branch, since I'm coding the Kubernetes part now)
 - Swagger (API documentation and code generation)
 - Spring Boot
 - Cloud Config Server (Centralized configuration files of the microservices)
@@ -25,8 +26,7 @@ This project interfaces all purchase related actions.
 - Maven
 
 ### Deploy
-...the dockerfile I have is already outdated based on the current state of the system. 
-As soon as I have created a new version, I'm going to make it available here...
+...all the docker images have been created and pushed, I'm now creating the Kubernetes' configurations and as soon as I've finished it, you'll have it :] ...
 
 ### Info
 The Market Place project is composed by five microservices that are:
@@ -40,7 +40,7 @@ market-place-eureka.
 In the near future it will have a react frontend spa. Further down are the links to their repositories.
 
 Also, please find bellow the system's diagram. It will help further on how things 
-happens "behind the curtains".  
+happens "behind the curtains".
 
 ### How to
 Everything starts on the sellers api, where a seller has to be registered through the 
@@ -56,6 +56,8 @@ to the diagram bellow and also all the documentations provided on the openapi.ya
 responses and so on, please refer to the swagger "openapi.yaml" file
 located in the src/main/resources folder of each project. All you have to do is paste their content into 
 `https://editor.swagger.io/`.
+
+https://github.com/VandersonAssis/market-place-kubernetes
 
 https://github.com/VandersonAssis/market-place-docker-compose
 
@@ -78,10 +80,12 @@ https://github.com/VandersonAssis/market-place-exception-handlers
 #### Disclaimer
 This and any other piece of code belonging to the Market Place project is 
 being created with intention to show interviewers my abilities creating 
-a system using microservices architecture.  
+a system using microservices architecture.
 
 Also, please have in mind that 
 I work on this project only on my free time, therefore, improvements can take a little while to be made.
+
+Last but not least, feel free to do whatever the h311 you want with this code. :0d
 
 ### Diagram
 ![alt text](https://raw.githubusercontent.com/VandersonAssis/market-place-support-files/master/diagrams/system-diagram.png)
