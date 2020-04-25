@@ -6,7 +6,7 @@
         <Property name="LOG_LEVEL_PATTERN">%5p</Property>
         <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
         <Property name="CONSOLE_LOG_PATTERN">
-            %clr{%d{${LOG_DATEFORMAT_PATTERN}}} %clr{${LOG_LEVEL_PATTERN} [${hostName}.${APP_NAME},%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-Span-Export}]} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} (%M.%L) - %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+            %clr{%d{${LOG_DATEFORMAT_PATTERN}}} %clr{${LOG_LEVEL_PATTERN} [${hostName}.${APP_NAME},%X{traceId},%X{spanId},%X{X-Span-Export}]} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} (%M.%L) - %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
         </Property>
     </Properties>
 

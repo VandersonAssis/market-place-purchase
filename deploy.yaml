@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: market-place-purchase
+spec:
+  selector:
+    app: market-place-purchase
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30086
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: market-place-purchase
+spec:
+  selector:
+    matchLabels:
+      app: market-place-purchase
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: market-place-purchase
+    spec:
+      containers:
+        - name: market-place-purchase
+          image: market-place-purchase
+          env:
+            - name: "KUBERNETES_NAMESPACE"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.namespace"
+          ports:
+            - containerPort: 8080

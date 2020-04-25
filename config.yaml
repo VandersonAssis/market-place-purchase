@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: market-place-purchase
+data:
+  application.properties: |-
+    spring.application.name=market-place-purchase
+    spring.zipkin.baseUrl=http://zipkin:9411/
+    spring.rabbitmq.addresses=rabbitmq-0.rabbitmq-headless:5672,rabbitmq-1.rabbitmq-headless:5672
+    spring.data.mongodb.uri=mongodb://market-place-mongodb-0.market-place-mongodb,market-place-mongodb-1.market-place-mongodb,market-place-mongodb-2.market-place-mongodb/products-db?serverSelectionTimeoutMS=10000&connectTimeoutMS=20000
+    api-gateway.application.name=market-place-api-gateway
+    products-service.url=http://market-place-products
+    spring.jackson.default-property-inclusion=NON_NULL
+    spring.mvc.throw-exception-if-no-handler-found=true
+    spring.rabbitmq.listener.simple.retry.enabled=true
+    spring.rabbitmq.listener.simple.retry.initial-interval=1000
+    spring.rabbitmq.listener.simple.retry.max-attempts=3
+    spring.rabbitmq.listener.simple.retry.max-interval=10000
+    spring.rabbitmq.listener.simple.retry.multiplier=2.0
+    spring.rabbitmq.listener.simple.retry.stateless=true
+    amqp.mppu.process.order.queue=mppu.process.order
+    amqp.mppu.process.order.queue.ex=mppu.process.order.ex
+    amqp.mppu.process.order.dlq=mppu.process.order.dlq
+    amqp.mppu.process.order.dlx=mppu.process.order.dlx
+    amqp.mppu.process.order.routing.key=PROCESS_ORDER
+    amqp.mpop.order.processed.queue=mpop.order.processed
+    hystrix.command.default.execution.timeout.enabled=false
