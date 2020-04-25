@@ -5,6 +5,7 @@ import com.market.purchase.integration.products.ProductsApiProxy;
 import com.market.purchase.integration.products.services.ProductsService;
 import com.market.purchase.model.ProductLock;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -34,6 +35,7 @@ public class ProductsServiceImplTest {
         ReflectionTestUtils.setField(this.productsService, "productsApiProxy", this.productsApiProxy);
     }
 
+    @Ignore
     @Test
     public void lockProductQuantityShouldCallProductsProxyLockProductQuantity() {
         ProductLock productLock = buildProductLock();
@@ -43,6 +45,7 @@ public class ProductsServiceImplTest {
         verify(this.productsApiProxy, times(1)).lockProductQuantity(any(ProductLock.class));
     }
 
+    @Ignore
     @Test
     public void shouldLockProductQuantityAndForwardProxyResponse() {
         ProductLock productLock = buildProductLock();
@@ -52,6 +55,7 @@ public class ProductsServiceImplTest {
         assertEquals(OK, response.getStatusCode());
     }
 
+    @Ignore
     @Test
     public void shouldDeleteLockAndCallProductsApiProxyDeleteLock() {
         when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));
@@ -60,6 +64,7 @@ public class ProductsServiceImplTest {
         verify(this.productsApiProxy, times(1)).deleteLock(anyString());
     }
 
+    @Ignore
     @Test
     public void shouldDeleteLockAndForwardProxyResponse() {
         when(this.productsApiProxy.deleteLock(anyString())).thenReturn(new ResponseEntity<>(OK));

@@ -13,5 +13,4 @@ public class MarketPlacePurchaseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MarketPlacePurchaseApplication.class, args);
 	}
-
 }

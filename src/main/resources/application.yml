@@ -1,0 +1,7 @@
+spring.application.name: market-place-purchase
+logging.level.org.springframework.cloud.kubernetes: DEBUG
+
+management:
+  endpoint:
+    restart:
+      enabled: true
