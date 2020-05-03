@@ -9,6 +9,7 @@ E-Mail: assis.vanderson@gmail.com
 Ps.: I'm currently living in Brazil but willing to relocate to another country. So if you have any opportunity you want to discuss, please reach out!
 
 ### Technologies Used System Wide
+- React 16 (Frontend App)
 - Java 12
 - MongoDB
 - Kubernetes (Container Orchestration)
@@ -78,7 +79,7 @@ located in the src/main/resources folder of each project. All you have to do is 
 #### Repositories
 https://github.com/VandersonAssis/market-place-kubernetes
 
-https://github.com/VandersonAssis/market-palce-integration-tests
+https://github.com/VandersonAssis/market-place-app
 
 https://github.com/VandersonAssis/market-place-products
 
@@ -90,11 +91,12 @@ https://github.com/VandersonAssis/market-place-orderprocessor
 
 https://github.com/VandersonAssis/market-place-exception-handlers
 
+https://github.com/VandersonAssis/market-palce-integration-tests
+
 #### Coming up
 - Monitoring with Prometheus
 - Api Gateway
 - Security configurations
-- Frontend using React
 
 #### Disclaimer
 This and any other piece of code belonging to the Market Place system is 
