@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>12</java.version>
-		<openapi-generator-maven-plugin>4.1.3</openapi-generator-maven-plugin>
+		<openapi-generator-maven-plugin>5.1.0</openapi-generator-maven-plugin>
 		<openapi-generator>4.2.0</openapi-generator>
 		<openapi-jackson>0.2.0</openapi-jackson>
 		<junit5.version>5.5.2</junit5.version>
